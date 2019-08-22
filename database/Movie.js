@@ -13,5 +13,5 @@ const movieSchema = mongoose.Schema({
   stars: [String]
 });
 
-const Movie = mongoose('Movie', movieSchema);
+const Movie = mongoose.model('Movie', movieSchema);
 module.exports = Movie;
