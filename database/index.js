@@ -1,15 +1,6 @@
 const mongoose = require('mongoose');
-let mongoURL = 'mongodb://localhost/imongodb';
-mongoose.connect(mongoURL);
+const mongoURL = 'mongodb://localhost/imongodb';
 
-let movieSchema = mongoose.Schema({
-  name:
-  year:
-  ageRating:
-  genre:
-  coverImage:
-  reviewRating:
-  summary:
-  director:
-  stars:
-});
+const db = mongoose.connect(mongoURL);
+
+module.exports = db;
