@@ -1,4 +1,3 @@
-const db = require('./index.js');
 const Movie = require('./Movie.js');
 const faker = require('faker');
 
@@ -48,5 +47,4 @@ Movie.create(seeds, (err, movies) => {
   if (err) {
     console.log('Error while seeding db');
   }
-  db.disconnect();
 });
