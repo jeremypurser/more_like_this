@@ -15,7 +15,7 @@ const generateMovie = (n) => {
   // rating
   const ratings = ['G', 'PG', 'PG-13', 'R'];
   movie.mpaaRating = ratings[Math.floor(Math.random() * 4)];
-  const genres = ['Comedy', 'Sci-fi', 'Horror', 'Romance', 'Action', 'Thriller', 'Drama', 'Myster', 'Crime', 'Animation', 'Adventure', 'Fantasy', 'Mystery', 'Musical'];
+  const genres = ['Comedy', 'Sci-fi', 'Horror', 'Romance', 'Action', 'Thriller', 'Drama', 'Mystery', 'Crime', 'Animation', 'Adventure', 'Fantasy', 'Mystery', 'Musical'];
   // 2 genres per movie
   movie.genre = [genres[Math.floor(Math.random() * 14)], genres[Math.floor(Math.random() * 14)]];
   // movie image from S3
