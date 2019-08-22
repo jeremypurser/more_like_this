@@ -22,7 +22,7 @@ const generateMovie = (n) => {
   movie.coverImage = `https://hrr40-fec2-jeremypurser.s3.us-east-2.amazonaws.com/movie_img${n}.jpg`;
   // movie rating, lowest is 2, rounded to tenths
   const randomNum = Math.random() * 8 + 2;
-  movie.reviewRating = Math.max(Math.round(randomNum * 10) / 10, 2.8);
+  movie.reviewRating = [Math.max(Math.round(randomNum * 10) / 10, 2.8)];
   // summary
   movie.summary = faker.lorem.paragraph();
   // director

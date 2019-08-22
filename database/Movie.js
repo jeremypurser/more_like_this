@@ -7,7 +7,7 @@ const movieSchema = mongoose.Schema({
   mpaaRating: String,
   genre: [String],
   coverImage: String,
-  reviewRating: Number,
+  reviewRating: [Number],
   summary: String,
   director: String,
   stars: [String]
