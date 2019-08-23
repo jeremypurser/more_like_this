@@ -1,11 +1,5 @@
 const mongoose = require('mongoose');
-
-let mongoURL;
-if (process.env.NODE_ENV !== 'test') {
-  mongoURL = 'mongodb://localhost/imongodb';
-} else {
-  mongoURL = 'mongodb://localhost:27017';
-}
+const mongoURL = 'mongodb://localhost/imongodb';
 
 const db = mongoose.connect(mongoURL, { useNewUrlParser: true });
 
