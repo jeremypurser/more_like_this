@@ -1,3 +1,6 @@
 module.exports = {
-    "extends": "hackreactor"
+    "extends": "hackreactor",
+    "parserOptions": {
+      "ecmaVersion": 8
+    }
 };
