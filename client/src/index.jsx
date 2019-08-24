@@ -1,8 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import More from './components/More';
 
-const App = () => (
-  <div>hello</div>
-);
-
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<More />, document.getElementById('root'));
