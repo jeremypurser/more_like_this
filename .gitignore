@@ -5,6 +5,7 @@
 npm
 npm-debug.log
 node_modules/
+public/bundle.js
 
 pids
 *.pid
@@ -19,5 +20,3 @@ coverage
 
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
-
-public/bundle.js
