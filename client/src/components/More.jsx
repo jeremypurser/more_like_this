@@ -14,25 +14,41 @@ const Frame = styled.span`
   padding: 3px;
 `;
 
+const StyleDiv = styled.div`
+  position: fixed;
+  height: 250px;
+  width: 300px;
+  border: solid 1px red;
+  background: white;
+  top: 45px;
+  left: 290px;
+  z-index: 1;
+`;
+
 const View = styled.div`
   display: block;
   float: left;
 `;
 
 const Container = styled.div`
-  // position: absolute;
-  box-sizing: border-box;
   width: 600px;
   height: 240px;
   overflow: hidden;
-  overflow-x: hidden;
-  // overflow-y: hidden;
-  // clip-path: ${props => props.mosaic === 'prev' ? 'inset(0 315px 0 0)' : 'inset(0 0 0 280px)' };
   transform: translateX(${props => props.mosaic === 'prev' ? '0px' : '-290px'});
-
-  transition: clip-path: 3s;
   transition: transform 0.5s;
   margin-bottom: 10px;
+`;
+
+const Prev = styled.a`
+  color: ${props => props.mosaic === 'next' ? 'black' : '#878787' };
+`;
+
+const Next = styled.a`
+  color: ${props => props.mosaic === 'next' ? '#878787' : 'black' };
+`;
+
+const Arrow = styled.div`
+  margin-left: 70px;
 `;
 
 class More extends React.Component {
@@ -71,10 +87,13 @@ class More extends React.Component {
             {this.state.next.map(movie => <Frame key={movie._id}><Img key={movie._id} src={movie.coverImage} /></Frame>)}
           </View>
         </Container>
-        <div>
-          <a onClick={() => { this.setState({ mosaic: 'prev' }); }}>&larr; Prev 6 </a>
-          <a onClick={() => { this.setState({ mosaic: 'next' }); }}>Next 6 &rarr;</a>
-        </div>
+        <Arrow>
+          <Prev mosaic={this.state.mosaic}
+            onClick={() => { this.setState({ mosaic: 'prev' }); }}>&larr; Prev 6 </Prev>
+          <Next mosaic={this.state.mosaic}
+            onClick={() => { this.setState({ mosaic: 'next' }); }}>Next 6 &rarr;</Next>
+        </Arrow>
+        <StyleDiv />
       </div>
     );
   }
