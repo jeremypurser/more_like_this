@@ -72,6 +72,9 @@ class More extends React.Component {
         this.setState({ movies });
         this.setState({ prev: this.state.movies.slice(0, 6) });
         this.setState({ next: this.state.movies.slice(6) });
+      })
+      .catch(err => {
+        console.log('error in fetch');
       });
   }
 
@@ -89,7 +92,8 @@ class More extends React.Component {
         </Container>
         <Arrow>
           <Prev mosaic={this.state.mosaic}
-            onClick={() => { this.setState({ mosaic: 'prev' }); }}>&larr; Prev 6 </Prev>
+            onClick={() => { this.setState({ mosaic: 'prev' }); }}>&larr; Prev 6</Prev>
+          <span> | </span>
           <Next mosaic={this.state.mosaic}
             onClick={() => { this.setState({ mosaic: 'next' }); }}>Next 6 &rarr;</Next>
         </Arrow>
