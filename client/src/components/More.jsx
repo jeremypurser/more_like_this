@@ -2,6 +2,9 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 const Img = styled.img`
+  object-fit: cover;
+  width: 90px;
+  height: 125px;
   max-width: 100%;
   max-height: 100%;
 `;
@@ -9,20 +12,24 @@ const Img = styled.img`
 const Frame = styled.span`
   display: block;
   float: left;
-  width: 90px;
-  height: 120px;
+  overflow: auto;
   padding: 3px;
 `;
 
 const StyleDiv = styled.div`
   position: fixed;
-  height: 250px;
+  height: 260px;
   width: 300px;
   border: solid 1px red;
   background: white;
   top: 45px;
-  left: 290px;
+  left: 295px;
   z-index: 1;
+`;
+
+const StyleDiv2 = styled(StyleDiv)`
+  width: 8px;
+  left: 0;
 `;
 
 const View = styled.div`
@@ -32,7 +39,7 @@ const View = styled.div`
 
 const Container = styled.div`
   width: 600px;
-  height: 240px;
+  height: 255px;
   overflow: hidden;
   transform: translateX(${props => props.mosaic === 'prev' ? '0px' : '-290px'});
   transition: transform 0.5s;
@@ -98,6 +105,7 @@ class More extends React.Component {
             onClick={() => { this.setState({ mosaic: 'next' }); }}>Next 6 &rarr;</Next>
         </Arrow>
         <StyleDiv />
+        <StyleDiv2 />
       </div>
     );
   }
