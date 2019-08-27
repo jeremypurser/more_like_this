@@ -9,8 +9,7 @@ const Img = styled.img`
   max-height: 100%;
 `;
 
-const Frame = styled.span`
-  display: block;
+const Frame = styled.div`
   float: left;
   overflow: auto;
   padding: 3px;
