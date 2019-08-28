@@ -9,8 +9,7 @@ const Img = styled.img`
   max-height: 100%;
 `;
 
-const Frame = styled.span`
-  display: block;
+const Frame = styled.div`
   float: left;
   overflow: auto;
   padding: 3px;
@@ -69,20 +68,23 @@ class More extends React.Component {
     };
   }
 
-  componentDidMount() {
+  fetchData() {
     return fetch('/movies')
       .then(response => {
-        return response.json();
+        return response.ok ? response.json() : response;
       })
       .then(movies => {
-        console.log(movies);
         this.setState({ movies });
-        this.setState({ prev: this.state.movies.slice(0, 6) });
-        this.setState({ next: this.state.movies.slice(6) });
+        this.setState({ prev: movies.slice(0, 6) });
+        this.setState({ next: movies.slice(6) });
       })
       .catch(err => {
-        console.log('error in fetch');
+        console.log(err);
       });
+  }
+
+  componentDidMount() {
+    this.fetchData();
   }
 
   render() {

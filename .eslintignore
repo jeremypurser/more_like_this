@@ -1,2 +1,3 @@
 /public/bundle.js
 /node_modules/*
+__mocks__/fetchDataMock.js

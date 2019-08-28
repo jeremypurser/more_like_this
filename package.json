@@ -46,7 +46,6 @@
     "eslint-plugin-react-hooks": "^1.7.0",
     "faker": "^4.1.0",
     "jest": "^24.9.0",
-    "jest-fetch-mock": "^2.1.2",
     "supertest": "^4.0.2",
     "webpack": "^4.39.2",
     "webpack-cli": "^3.3.7"
