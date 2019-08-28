@@ -16,6 +16,8 @@ describe('<More />', () => {
         next: data.slice(6),
         mosaic: 'prev'
       });
+
+      expect(wrapper.html()).toContain('img');
     });
     done();
   });
@@ -26,17 +28,24 @@ describe('<More />', () => {
 
   test('renders a div', () => {
     const wrapper = shallow(<More />);
-    expect(wrapper.find('div').length).toBe(1);
+    expect(wrapper.find('div')).toHaveLength(1);
   });
 
   test('renders two <a>', () => {
     const wrapper = mount(<More />);
-    expect(wrapper.find('a').length).toBe(2);
+    expect(wrapper.find('a')).toHaveLength(2);
   });
 
   test('renders one <p>', () => {
     const wrapper = mount(<More />);
-    expect(wrapper.find('p').length).toBe(1);
+    expect(wrapper.find('p')).toHaveLength(1);
   });
+
+  test('<p> === More Like This', () => {
+    const wrapper = render(<More />);
+    const p = wrapper.find('p');
+    expect(p.text()).toBe('More Like This');
+  });
+
 });
 
