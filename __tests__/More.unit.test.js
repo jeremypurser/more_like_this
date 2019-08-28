@@ -1,8 +1,25 @@
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import More from '../client/src/components/More.jsx';
+import data from '../__mocks__/fetchDataMock.js';
 
 describe('<More />', () => {
+  test('fetches data from server', async done => {
+    const wrapper = shallow(<More />);
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+    expect(await global.fetch()).toEqual(data);
+
+    process.nextTick(() => {
+      expect(wrapper.state()).toEqual({
+        movies: data,
+        prev: data.slice(0, 6),
+        next: data.slice(6),
+        mosaic: 'prev'
+      });
+    });
+    done();
+  });
+
   test('renders without crashing', () => {
     shallow(<More />);
   });
