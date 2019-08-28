@@ -1,14 +1,14 @@
 module.exports = {
-    "extends": "hackreactor",
-    "parserOptions": {
-      "ecmaVersion": 2019,
-      "ecmaFeatures": {
-        "jsx": true
+    'extends': 'hackreactor',
+    'parserOptions': {
+      'ecmaVersion': 2019,
+      'ecmaFeatures': {
+        'jsx': true
       },
-      "sourceType": "module"
+      'sourceType': 'module'
     },
-    "plugins": [
-      "react"
+    'plugins': [
+      'react'
     ],
-    "parser": "babel-eslint"
+    'parser': 'babel-eslint'
 };
