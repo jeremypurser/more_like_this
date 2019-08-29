@@ -1,14 +1,14 @@
 import React from 'react';
-import { HiliteDiv, HighlightImg,
-  HiliteFrame, Info } from './StyledComponents.jsx';
+import { HighlightDiv, HighlightImg,
+  HighlightFrame, Info } from './StyledComponents.jsx';
 
-const Highlight = ({movie}) => (
-  <HiliteDiv>
-    <HiliteFrame>
+const Highlight = ({movie, increment}) => (
+  <HighlightDiv>
+    <HighlightFrame>
       <HighlightImg src={movie.coverImage} />
       <button>Add to Watchlist</button>
-      <button>Next &rarr;</button>
-    </HiliteFrame>
+      <button onClick={increment}>Next &rarr;</button>
+    </HighlightFrame>
     <Info>
       <h3>{movie.title} <span>({movie.year})</span></h3>
       <p><span>{movie.mpaaRating}</span>{movie.genre}</p>
@@ -16,7 +16,7 @@ const Highlight = ({movie}) => (
       <p>Director: {movie.director}</p>
       <p>Stars: {movie.stars}</p>
     </Info>
-  </HiliteDiv>
+  </HighlightDiv>
 );
 
 export default Highlight;
