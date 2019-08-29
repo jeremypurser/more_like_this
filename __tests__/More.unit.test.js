@@ -14,7 +14,8 @@ describe('<More />', () => {
         movies: data,
         prev: data.slice(0, 6),
         next: data.slice(6),
-        mosaic: 'prev'
+        mosaic: 'prev',
+        highlighted: 0
       });
 
       expect(wrapper.html()).toContain('img');
@@ -26,9 +27,9 @@ describe('<More />', () => {
     shallow(<More />);
   });
 
-  test('renders a div', () => {
-    const wrapper = shallow(<More />);
-    expect(wrapper.find('div')).toHaveLength(1);
+  test('renders 7 divs', () => {
+    const wrapper = mount(<More />);
+    expect(wrapper.find('div')).toHaveLength(7);
   });
 
   test('renders two <a>', () => {
