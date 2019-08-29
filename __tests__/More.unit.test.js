@@ -36,15 +36,15 @@ describe('<More />', () => {
     expect(wrapper.find('a')).toHaveLength(2);
   });
 
-  test('renders one <p>', () => {
+  test('renders one <h2>', () => {
     const wrapper = mount(<More />);
-    expect(wrapper.find('p')).toHaveLength(1);
+    expect(wrapper.find('h2')).toHaveLength(1);
   });
 
   test('<p> === More Like This', () => {
     const wrapper = render(<More />);
-    const p = wrapper.find('p');
-    expect(p.text()).toBe('More Like This');
+    const h2 = wrapper.find('h2');
+    expect(h2.text()).toBe('More Like This');
   });
 
 });
