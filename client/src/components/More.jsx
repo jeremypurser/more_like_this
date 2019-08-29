@@ -1,61 +1,9 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import Hightlight from './Highlight.jsx';
+import {
+  Img, Frame, StyleDiv2, View, Container, Prev, Next, Arrow
+} from './StyledComponents.jsx';
 
-const Img = styled.img`
-  object-fit: cover;
-  width: 90px;
-  height: 125px;
-  max-width: 100%;
-  max-height: 100%;
-`;
-
-const Frame = styled.div`
-  float: left;
-  overflow: auto;
-  padding: 3px;
-`;
-
-const StyleDiv = styled.div`
-  position: fixed;
-  height: 260px;
-  width: 300px;
-  border: solid 1px red;
-  background: white;
-  top: 45px;
-  left: 295px;
-  z-index: 1;
-`;
-
-const StyleDiv2 = styled(StyleDiv)`
-  width: 8px;
-  left: 0;
-`;
-
-const View = styled.div`
-  display: block;
-  float: left;
-`;
-
-const Container = styled.div`
-  width: 600px;
-  height: 255px;
-  overflow: hidden;
-  transform: translateX(${props => props.mosaic === 'prev' ? '0px' : '-290px'});
-  transition: transform 0.5s;
-  margin-bottom: 10px;
-`;
-
-const Prev = styled.a`
-  color: ${props => props.mosaic === 'next' ? 'black' : '#878787' };
-`;
-
-const Next = styled.a`
-  color: ${props => props.mosaic === 'next' ? '#878787' : 'black' };
-`;
-
-const Arrow = styled.div`
-  margin-left: 70px;
-`;
 
 class More extends React.Component {
   constructor() {
@@ -64,7 +12,8 @@ class More extends React.Component {
       movies: [],
       prev: [],
       next: [],
-      mosaic: 'prev'
+      mosaic: 'prev',
+      highlighted: null
     };
   }
 
@@ -74,9 +23,12 @@ class More extends React.Component {
         return response.ok ? response.json() : response;
       })
       .then(movies => {
-        this.setState({ movies });
-        this.setState({ prev: movies.slice(0, 6) });
-        this.setState({ next: movies.slice(6) });
+        this.setState({
+          movies,
+          prev: movies.slice(0, 6),
+          next: movies.slice(6),
+          highlighted: 0
+        });
       })
       .catch(err => {
         console.log(err);
@@ -87,26 +39,81 @@ class More extends React.Component {
     this.fetchData();
   }
 
+  becomeHighlight(e) {
+    this.setState({
+      highlighted: Number(e.target.id)
+    });
+  }
+
+  handlePrev() {
+    this.setState({
+      mosaic: 'prev',
+      highlighted: 0
+    });
+  }
+
+  handleNext() {
+    this.setState({
+      mosaic: 'next',
+      highlighted: 6
+    });
+  }
+
+  incrementHighlight() {
+    let current = this.state.highlighted;
+    if (current === 11) {
+      current = -1;
+    }
+    let highlighted = current + 1;
+    this.setState({ highlighted });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.highlighted === 5 && this.state.highlighted === 6) {
+      this.setState({mosaic: 'next'});
+    } else if (prevState.highlighted === 11 && this.state.highlighted === 0) {
+      this.setState({mosaic: 'prev'});
+    }
+  }
+
   render() {
+    let HighlightDiv = this.state.highlighted === null ? <div></div> :
+      <Hightlight movie={this.state.movies[this.state.highlighted]}
+        increment={this.incrementHighlight.bind(this)} />;
+
     return (
       <div>
-        <p>More Like This</p>
+        <h2>More Like This</h2>
         <Container mosaic={this.state.mosaic}>
           <View>
-            {this.state.prev.map(movie => <Frame key={movie._id}><Img key={movie._id} src={movie.coverImage} /></Frame>)}
+            {this.state.prev.map((movie, idx) => (
+              <Frame key={idx}>
+                <Img id={idx} key={idx}
+                  onPointerEnter={(e) => { this.becomeHighlight(e); }}
+                  highlighted={this.state.highlighted}
+                  src={movie.coverImage} />
+              </Frame>)
+            )}
           </View>
           <View>
-            {this.state.next.map(movie => <Frame key={movie._id}><Img key={movie._id} src={movie.coverImage} /></Frame>)}
+            {this.state.next.map((movie, idx) => (
+              <Frame key={idx}>
+                <Img id={idx + 6} key={idx + 6}
+                  onPointerEnter={(e) => { this.becomeHighlight(e); }}
+                  highlighted={this.state.highlighted}
+                  src={movie.coverImage} />
+              </Frame>)
+            )}
           </View>
         </Container>
         <Arrow>
           <Prev mosaic={this.state.mosaic}
-            onClick={() => { this.setState({ mosaic: 'prev' }); }}>&larr; Prev 6</Prev>
+            onClick={this.handlePrev.bind(this)}>&larr; Prev 6</Prev>
           <span> | </span>
           <Next mosaic={this.state.mosaic}
-            onClick={() => { this.setState({ mosaic: 'next' }); }}>Next 6 &rarr;</Next>
+            onClick={this.handleNext.bind(this)}>Next 6 &rarr;</Next>
         </Arrow>
-        <StyleDiv />
+        {HighlightDiv}
         <StyleDiv2 />
       </div>
     );

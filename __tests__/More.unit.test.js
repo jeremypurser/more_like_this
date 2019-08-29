@@ -14,7 +14,8 @@ describe('<More />', () => {
         movies: data,
         prev: data.slice(0, 6),
         next: data.slice(6),
-        mosaic: 'prev'
+        mosaic: 'prev',
+        highlighted: 0
       });
 
       expect(wrapper.html()).toContain('img');
@@ -26,9 +27,9 @@ describe('<More />', () => {
     shallow(<More />);
   });
 
-  test('renders a div', () => {
-    const wrapper = shallow(<More />);
-    expect(wrapper.find('div')).toHaveLength(1);
+  test('renders 7 divs', () => {
+    const wrapper = mount(<More />);
+    expect(wrapper.find('div')).toHaveLength(7);
   });
 
   test('renders two <a>', () => {
@@ -36,15 +37,15 @@ describe('<More />', () => {
     expect(wrapper.find('a')).toHaveLength(2);
   });
 
-  test('renders one <p>', () => {
+  test('renders one <h2>', () => {
     const wrapper = mount(<More />);
-    expect(wrapper.find('p')).toHaveLength(1);
+    expect(wrapper.find('h2')).toHaveLength(1);
   });
 
   test('<p> === More Like This', () => {
     const wrapper = render(<More />);
-    const p = wrapper.find('p');
-    expect(p.text()).toBe('More Like This');
+    const h2 = wrapper.find('h2');
+    expect(h2.text()).toBe('More Like This');
   });
 
 });
