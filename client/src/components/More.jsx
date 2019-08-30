@@ -1,7 +1,8 @@
 import React from 'react';
 import Hightlight from './Highlight.jsx';
 import {
-  Img, Frame, StyleDiv2, View, Container, Prev, Next, Arrow
+  Img, Frame, Spacer, ViewContainer, View,
+  Container, Prev, Next, Arrow, H2
 } from './StyledComponents.jsx';
 
 
@@ -45,17 +46,10 @@ class More extends React.Component {
     });
   }
 
-  handlePrev() {
+  handleArrow(mosaic) {
     this.setState({
-      mosaic: 'prev',
-      highlighted: 0
-    });
-  }
-
-  handleNext() {
-    this.setState({
-      mosaic: 'next',
-      highlighted: 6
+      mosaic,
+      highlighted: mosaic === 'prev' ? 0 : 6
     });
   }
 
@@ -77,14 +71,14 @@ class More extends React.Component {
   }
 
   render() {
-    let HighlightDiv = this.state.highlighted === null ? <div></div> :
+    const HighlightDiv = this.state.highlighted === null ? <div></div> :
       <Hightlight movie={this.state.movies[this.state.highlighted]}
         increment={this.incrementHighlight.bind(this)} />;
 
     return (
-      <div>
-        <h2>More Like This</h2>
-        <Container mosaic={this.state.mosaic}>
+      <Container>
+        <H2>More Like This</H2>
+        <ViewContainer mosaic={this.state.mosaic}>
           <View>
             {this.state.prev.map((movie, idx) => (
               <Frame key={idx}>
@@ -105,17 +99,17 @@ class More extends React.Component {
               </Frame>)
             )}
           </View>
-        </Container>
+        </ViewContainer>
         <Arrow>
           <Prev mosaic={this.state.mosaic}
-            onClick={this.handlePrev.bind(this)}>&larr; Prev 6</Prev>
-          <span> | </span>
+            onClick={() => { this.handleArrow('prev'); }}>◄ Prev 6</Prev>
+          <span>&ensp;</span>
           <Next mosaic={this.state.mosaic}
-            onClick={this.handleNext.bind(this)}>Next 6 &rarr;</Next>
+            onClick={() => { this.handleArrow('next'); }}>Next 6 ►</Next>
         </Arrow>
         {HighlightDiv}
-        <StyleDiv2 />
-      </div>
+        <Spacer />
+      </Container>
     );
   }
 }
