@@ -1,8 +1,8 @@
 import React from 'react';
 import Hightlight from './Highlight.jsx';
 import {
-  Img, Frame, StyleDiv2, ViewContainer, View,
-  Container, Prev, Next, Arrow
+  Img, Frame, Spacer, ViewContainer, View,
+  Container, Prev, Next, Arrow, H2
 } from './StyledComponents.jsx';
 
 
@@ -49,7 +49,7 @@ class More extends React.Component {
   handleArrow(mosaic) {
     this.setState({
       mosaic,
-      highlighted: 0
+      highlighted: mosaic === 'prev' ? 0 : 6
     });
   }
 
@@ -77,7 +77,7 @@ class More extends React.Component {
 
     return (
       <Container>
-        <h2>More Like This</h2>
+        <H2>More Like This</H2>
         <ViewContainer mosaic={this.state.mosaic}>
           <View>
             {this.state.prev.map((movie, idx) => (
@@ -108,7 +108,7 @@ class More extends React.Component {
             onClick={() => { this.handleArrow('next'); }}>Next 6 ►</Next>
         </Arrow>
         {HighlightDiv}
-        <StyleDiv2 />
+        <Spacer />
       </Container>
     );
   }
