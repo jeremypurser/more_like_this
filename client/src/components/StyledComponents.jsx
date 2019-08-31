@@ -25,7 +25,7 @@ const Frame = styled.div`
 const HighlightDiv = styled.div`
   position: relative;
   height: 300px;
-  width: 600px;
+  width: 500px;
   background: white;
   top: -315px;
   left: 295px;
@@ -42,7 +42,7 @@ const Spacer = styled(HighlightDiv)`
 const Info = styled.div`
   overflow: hidden;
   margin-top: -20px;
-  width: 275px;
+  width: 225px;
 `;
 
 const HighlightFrame = styled.div`
@@ -133,6 +133,12 @@ const Summary = styled.p`
   color: #333;
   line-height: 1.4;
   font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 8;
+  max-height: 11;
 `;
 
 const Btn1 = styled.button`
