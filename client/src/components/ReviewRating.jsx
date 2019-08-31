@@ -80,7 +80,7 @@ class ReviewRating extends React.Component {
     this.setState({
       hover: false
     });
-    const hovered = this.state.hovered;
+    const { hovered } = this.state;
     for (let i = 0; i <= hovered; i++) {
       let star = document.getElementById(`star${i}`);
       star.style.color = null;
