@@ -1,7 +1,10 @@
 import React from 'react';
-import { HighlightDiv, HighlightImg, Title, Year,
+import ReviewRating from './ReviewRating.jsx';
+import {
+  HighlightDiv, HighlightImg, Title, Year,
   HighlightFrame, Info, MPAA, Genre, Summary,
-  H3, Btn1, Btn2 } from './StyledComponents.jsx';
+  H3, Btn1, Btn2
+} from './StyledComponents.jsx';
 import styled, { css, ThemeProvider } from 'styled-components';
 
 
@@ -44,7 +47,7 @@ const Highlight = ({movie, increment}) => {
             <MPAA />
           </ThemeProvider> {movie.genre.join(' | ')}
         </Genre>
-        <p>Rating: {movie.reviewRating}</p>
+        <ReviewRating movie={movie.reviewRating} />
         <Summary>{movie.summary}</Summary>
         <Summary><strong>Director:</strong> {movie.director}</Summary>
         <Summary><strong>Stars:</strong> {movie.stars.join(', ')}</Summary>
