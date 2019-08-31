@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css, ThemeProvider } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const Score = styled.span`
   font-family: Verdana, Arial, sans-serif;
@@ -11,8 +11,8 @@ const Score = styled.span`
 
 let StarSpan = styled.span`
   cursor: pointer;
-  margin-right: 2px;
-  color: ${props => Number(props.star) + 1 <= Number(props.rating) ? '#a58600' : '#ddd'};
+  padding-right: 2px;
+  color: ${props => Number(props.star) + 1 <= Math.round(Number(props.rating)) ? '#a58600' : '#ddd'};
 `;
 
 const Stars = styled.div`
@@ -70,12 +70,21 @@ class ReviewRating extends React.Component {
       hovered,
       hover: true
     });
+    for (let i = 0; i <= hovered; i++) {
+      let star = document.getElementById(`star${i}`);
+      star.style.color = 'black';
+    }
   }
 
   handleLeave() {
     this.setState({
       hover: false
     });
+    const hovered = this.state.hovered;
+    for (let i = 0; i <= hovered; i++) {
+      let star = document.getElementById(`star${i}`);
+      star.style.color = null;
+    }
   }
 
   render() {
