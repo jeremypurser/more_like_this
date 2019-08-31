@@ -72,7 +72,7 @@ class ReviewRating extends React.Component {
     });
     for (let i = 0; i <= hovered; i++) {
       let star = document.getElementById(`star${i}`);
-      star.style.color = 'black';
+      star.style.color = '#136cb2';
     }
   }
 
