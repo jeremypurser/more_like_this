@@ -14,9 +14,13 @@ app.get('/movies', (req, res) => {
     res.send(clientDocs);
   });
 });
- 
-app.listen(port, () => {
-  console.log(`listening on port ${port}`);
-});
 
-module.exports = app;
+// Don't listen to port in test
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(port, () => {
+    console.log(`listening on port ${port}`);
+  });
+// Export module in test
+} else {
+  module.exports = app;
+}
