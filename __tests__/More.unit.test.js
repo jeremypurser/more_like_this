@@ -148,10 +148,6 @@ describe('<More />', () => {
       mosaic: 'prev',
       highlighted: 0
     });
-
   });
-
-
-
 });
 
