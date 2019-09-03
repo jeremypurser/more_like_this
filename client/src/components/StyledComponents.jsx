@@ -9,6 +9,8 @@ const Img = styled.img`
   outline: ${props => Number(props.id) === Number(props.highlighted) ? '3px solid #fd0' : 'none'};
 `;
 
+Img.displayName = 'Img';
+
 const HighlightImg = styled(Img)`
   display: block;
   width: 150px;
@@ -76,9 +78,13 @@ const Prev = styled.a`
   color: ${props => props.mosaic === 'next' ? '#136cb2' : '#ccc' };
 `;
 
+Prev.displayName = 'Prev';
+
 const Next = styled(Prev)`
   color: ${props => props.mosaic === 'next' ? '#ccc' : '#136cb2' };
 `;
+
+Next.displayName = 'Next';
 
 const Arrow = styled.div`
   margin-left: 80px;
