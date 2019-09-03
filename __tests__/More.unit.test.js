@@ -48,5 +48,110 @@ describe('<More />', () => {
     expect(h2.text()).toBe('More Like This');
   });
 
+  test('onPointerEnter changes state in first view', async done => {
+    const wrapper = mount(<More />);
+    expect(await global.fetch()).toEqual(data);
+
+    wrapper.update();
+    expect(wrapper.find('Img')).toHaveLength(12);
+    const e = {target: {id: 2}};
+    const ImgWrapper = wrapper.find('Img').at(0);
+    ImgWrapper.prop('onPointerEnter')(e);
+
+    process.nextTick(() => {
+      expect(wrapper.state()).toEqual({
+        movies: data,
+        prev: data.slice(0, 6),
+        next: data.slice(6),
+        mosaic: 'prev',
+        highlighted: 2
+      });
+    });
+    done();
+  });
+
+  test('onPointerEnter changes state in second view', async done => {
+    const wrapper = mount(<More />);
+    expect(await global.fetch()).toEqual(data);
+
+    wrapper.update();
+    expect(wrapper.find('Img')).toHaveLength(12);
+    const e = {target: {id: 9}};
+    const ImgWrapper = wrapper.find('Img').at(7);
+    ImgWrapper.prop('onPointerEnter')(e);
+
+    process.nextTick(() => {
+      expect(wrapper.state()).toEqual({
+        movies: data,
+        prev: data.slice(0, 6),
+        next: data.slice(6),
+        mosaic: 'prev',
+        highlighted: 9
+      });
+    });
+    done();
+  });
+
+  test('Prev onClick changes state', async done => {
+    const wrapper = mount(<More />);
+    expect(await global.fetch()).toEqual(data);
+    const PrevWrapper = wrapper.find('Prev');
+    PrevWrapper.prop('onClick')();
+
+    process.nextTick(() => {
+      expect(wrapper.state()).toEqual({
+        movies: data,
+        prev: data.slice(0, 6),
+        next: data.slice(6),
+        mosaic: 'prev',
+        highlighted: 0
+      });
+    });
+    done();
+  });
+
+  test('Next onClick changes state', async done => {
+    const wrapper = mount(<More />);
+    await global.fetch();
+    const NextWrapper = wrapper.find('Next');
+    NextWrapper.prop('onClick')();
+
+    process.nextTick(() => {
+      expect(wrapper.state()).toEqual({
+        movies: data,
+        prev: data.slice(0, 6),
+        next: data.slice(6),
+        mosaic: 'next',
+        highlighted: 6
+      });
+    });
+    done();
+  });
+
+  test('Next onClick changes state', () => {
+    const wrapper = mount(<More />);
+    wrapper.setState({
+      movies: data,
+      prev: data.slice(0, 6),
+      next: data.slice(6),
+      mosaic: 'next',
+      highlighted: 11
+    });
+    wrapper.update();
+    const HighlightWrapper = wrapper.find('Highlight');
+    HighlightWrapper.prop('increment')();
+    wrapper.update();
+    expect(wrapper.state()).toEqual({
+      movies: data,
+      prev: data.slice(0, 6),
+      next: data.slice(6),
+      mosaic: 'prev',
+      highlighted: 0
+    });
+
+  });
+
+
+
 });
 
