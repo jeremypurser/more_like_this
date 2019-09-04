@@ -8,7 +8,7 @@ const port = 3001;
 
 app.use(express.static(__dirname + '/../public'));
 app.use(cors({
-  origin: function(origin, next) {
+  origin: (origin, next) => {
     var allowedOrigins = [
       'http://localhost:3000',
       'http://localhost:3001'
