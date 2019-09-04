@@ -13,6 +13,7 @@ app.use(cors({
       'http://localhost:3000',
       'http://localhost:3001'
     ];
+    if (!origin) { return next(null, true); }
     if (allowedOrigins.indexOf(origin) === -1) {
       const message = 'The CORS policy for this site does not \
         allow access from the specified Origin.';
