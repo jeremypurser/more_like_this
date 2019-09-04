@@ -19,7 +19,7 @@ class More extends React.Component {
   }
 
   fetchData() {
-    return fetch('/movies')
+    return fetch('http://localhost:3001/movies')
       .then(response => {
         return response.ok ? response.json() : response;
       })
