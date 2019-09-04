@@ -3,10 +3,12 @@ const SRC_DIR = path.join(__dirname, '/client/src');
 const DIST_DIR = path.join(__dirname, '/public');
 
 module.exports = {
-  entry: path.join(SRC_DIR, 'index.jsx'),
+  entry: path.join(SRC_DIR, 'index.js'),
   output: {
     filename: 'bundle.js',
-    path: DIST_DIR
+    path: DIST_DIR,
+    libraryTarget: 'var',
+    library: 'More'
   },
   module: {
     rules: [
