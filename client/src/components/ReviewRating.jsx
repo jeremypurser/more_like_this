@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 
 const Score = styled.span`
@@ -54,41 +54,54 @@ const Ten = styled.span`
   }
 `;
 
-const ReviewRating = (props) => {
-  const [hover, setHover] = useState(false);
-  const [hovered, setHovered] = useState(null);
 
-  const handleHover = (e) => {
+class ReviewRating extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      hovered: null,
+      hover: false
+    };
+  }
+
+  handleHover(e) {
     const hovered = Number(e.target.id[e.target.id.length - 1]);
-    setHovered(hovered);
-    setHover(true);
+    this.setState({
+      hovered,
+      hover: true
+    });
     for (let i = 0; i <= hovered; i++) {
       let star = document.getElementById(`star${i}`);
       star.style.color = '#136cb2';
     }
-  };
+  }
 
-  const handleLeave = () => {
-    setHover(false);
+  handleLeave() {
+    this.setState({
+      hover: false
+    });
+    const hovered = this.state.hovered;
     for (let i = 0; i <= hovered; i++) {
       let star = document.getElementById(`star${i}`);
       star.style.color = null;
     }
-  };
-
-  const starRating = [];
-  for (let i = 0; i < 10; i++) {
-    starRating.push(<StarSpan onMouseOver={(e) => { handleHover(e); }}
-      onMouseLeave={() => { handleLeave(); }}
-      hovered={hovered} key={i} star={i}
-      id={`star${i}`} rating={props.movie}>&#9733;</StarSpan>);
   }
-  const ScoreDisplay = hover ? hovered + 1 : props.movie;
-  return (
-    <Stars>
-      {starRating} <Score>{ScoreDisplay}</Score>/<Ten>10</Ten>
-    </Stars>
-  );
-};
+
+  render() {
+    const starRating = [];
+    for (let i = 0; i < 10; i++) {
+      starRating.push(<StarSpan onMouseOver={(e) => { this.handleHover(e); }}
+        onMouseLeave={() => { this.handleLeave(); }}
+        hovered={this.state.hovered} key={i} star={i}
+        id={`star${i}`} rating={this.props.movie}>&#9733;</StarSpan>);
+    }
+    const ScoreDisplay = this.state.hover ? this.state.hovered + 1 : this.props.movie;
+    return (
+      <Stars>
+        {starRating} <Score>{ScoreDisplay}</Score>/<Ten>10</Ten>
+      </Stars>
+    );
+  }
+}
 
 export default ReviewRating;
