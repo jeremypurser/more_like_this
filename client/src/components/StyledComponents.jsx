@@ -36,8 +36,8 @@ const HighlightDiv = styled.div`
 `;
 
 const Spacer = styled(HighlightDiv)`
-  width: 4px;
-  left: -10px;
+  width: 200px;
+  left: -210px;
   top: -625px;
 `;
 
