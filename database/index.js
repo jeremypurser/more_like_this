@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const mongoURL = 'mongodb://localhost/imongodb';
 
-const db = mongoose.connect(mongoURL, { useNewUrlParser: true });
+const db = mongoose.connect('mongodb://mongo:27017/imongodb',
+  { useNewUrlParse: true });
 
 module.exports = db;
