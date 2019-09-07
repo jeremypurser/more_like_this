@@ -22,7 +22,7 @@ class More extends React.Component {
   fetchData() {
     return fetch('http://localhost:3001/movies')
       .then(response => {
-        return response.ok ? response.json() : response;
+        return response.json();
       })
       .then(movies => {
         this.setState({
@@ -77,7 +77,7 @@ class More extends React.Component {
         increment={this.incrementHighlight.bind(this)} />;
     let prevView;
     let nextView;
-    if (this.state.prev) {
+    if (this.state.prev.length) {
       prevView = this.state.prev.map((movie, idx) => (
         <Frame key={idx}>
           <Img id={idx} key={idx}
@@ -87,9 +87,9 @@ class More extends React.Component {
         </Frame>
       ));
     } else {
-      preView = <div></div>;
+      prevView = <div>Loading...</div>;
     }
-    if (this.state.next) {
+    if (this.state.next.length) {
       nextView = this.state.next.map((movie, idx) => (
         <Frame key={idx}>
           <Img id={idx + 6} key={idx + 6}
@@ -99,7 +99,7 @@ class More extends React.Component {
         </Frame>)
       );
     } else {
-      nextView = <div></div>;
+      nextView = <div>Loading...</div>;
     }
     return (
       <Container>
