@@ -18,12 +18,6 @@ app.get('/movies', (req, res) => {
   });
 });
 
-// Don't listen to port in test
-if (process.env.NODE_ENV !== 'test') {
-  app.listen(port, () => {
-    console.log(`listening on port ${port}`);
-  });
-// Export module in test
-} else {
-  module.exports = app;
-}
+app.listen(port, () => {
+  console.log(`listening on port ${port}`);
+});
