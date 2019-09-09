@@ -1,5 +1,7 @@
 const Movie = require('./Movie.js');
 const faker = require('faker');
+const fs = require('fs');
+const path = require('path');
 
 const generateMovie = (n) => {
   const movie = {};
@@ -41,6 +43,11 @@ const seedData = () => {
 
 const seeds = seedData();
 
+Movie.remove({}, err => {
+  if (err) {
+    console.log('Error while removing from db');
+  }
+});
 // Mongoose creating and saving documents
 // https://mongoosejs.com/docs/api/model.html#model_Model.create
 Movie.create(seeds, (err, movies) => {

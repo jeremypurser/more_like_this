@@ -14,14 +14,15 @@ class More extends React.Component {
       prev: [],
       next: [],
       mosaic: 'prev',
-      highlighted: null
+      highlighted: null,
+      hasError: false
     };
   }
 
   fetchData() {
     return fetch('http://localhost:3001/movies')
       .then(response => {
-        return response.ok ? response.json() : response;
+        return response.json();
       })
       .then(movies => {
         this.setState({
@@ -74,30 +75,41 @@ class More extends React.Component {
     const HighlightDiv = this.state.highlighted === null ? <div></div> :
       <Hightlight movie={this.state.movies[this.state.highlighted]}
         increment={this.incrementHighlight.bind(this)} />;
-
+    let prevView;
+    let nextView;
+    if (this.state.prev.length) {
+      prevView = this.state.prev.map((movie, idx) => (
+        <Frame key={idx}>
+          <Img id={idx} key={idx}
+            onPointerEnter={(e) => { this.becomeHighlight(e); }}
+            highlighted={this.state.highlighted}
+            src={movie.coverImage} />
+        </Frame>
+      ));
+    } else {
+      prevView = <div>Loading...</div>;
+    }
+    if (this.state.next.length) {
+      nextView = this.state.next.map((movie, idx) => (
+        <Frame key={idx}>
+          <Img id={idx + 6} key={idx + 6}
+            onPointerEnter={(e) => { this.becomeHighlight(e); }}
+            highlighted={this.state.highlighted}
+            src={movie.coverImage} />
+        </Frame>)
+      );
+    } else {
+      nextView = <div>Loading...</div>;
+    }
     return (
       <Container>
         <H2>More Like This</H2>
         <ViewContainer mosaic={this.state.mosaic}>
           <View>
-            {this.state.prev.map((movie, idx) => (
-              <Frame key={idx}>
-                <Img id={idx} key={idx}
-                  onPointerEnter={(e) => { this.becomeHighlight(e); }}
-                  highlighted={this.state.highlighted}
-                  src={movie.coverImage} />
-              </Frame>)
-            )}
+            {prevView}
           </View>
           <View>
-            {this.state.next.map((movie, idx) => (
-              <Frame key={idx}>
-                <Img id={idx + 6} key={idx + 6}
-                  onPointerEnter={(e) => { this.becomeHighlight(e); }}
-                  highlighted={this.state.highlighted}
-                  src={movie.coverImage} />
-              </Frame>)
-            )}
+            {nextView}
           </View>
         </ViewContainer>
         <Arrow>
