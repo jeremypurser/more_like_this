@@ -1,5 +1,6 @@
 import React from 'react';
 import Hightlight from './Highlight.jsx';
+import axios from 'axios';
 import {
   Img, Frame, Spacer, ViewContainer, View,
   Container, Prev, Next, Arrow, H2
@@ -20,11 +21,9 @@ class More extends React.Component {
   }
 
   fetchData() {
-    return fetch('http://localhost:3001/movies')
-      .then(response => {
-        return response.json();
-      })
+    axios.get('http://localhost:3001/movies')
       .then(movies => {
+        movies = movies.data;
         this.setState({
           movies,
           prev: movies.slice(0, 6),
